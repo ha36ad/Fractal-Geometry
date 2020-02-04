@@ -31,3 +31,21 @@ def drawL_system(t,instruction,angle, distance):
             t.right(angle)
         elif cmd == '-':
             t.left(angle)
+#main function
+def main(iterations, axiom, rules, angle, length=8, size=2, y_offset=0,
+        x_offset=0, offset_angle=0, width=450, height=450):
+    inst = create_l_system(iterations, axiom, rules)
+    t = turtle.Turtle()
+    wn = turtle.Screen()
+    wn.setup(width, height)
+    t.up()
+    t.backward(-x_offset)
+    t.left(90)
+    t.backward(-y_offset)
+    t.left(offset_angle)
+    t.down()
+    t.speed(0)
+    t.pensize(size)
+    draw_l_system(t, inst, angle, length)
+    t.hideturtle()
+    wn.exitonclick()
