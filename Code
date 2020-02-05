@@ -16,7 +16,7 @@ def L_system(its, axiom, rules):
         startingstring == endingstring 
     return endingstring
 #L-system
-def drawL_system(t,instruction,angle, distance):
+def drawLsystem(t,instruction,angle, distance):
     step = len([i for i in instruction if i in "FB"])
     step = 1/step
     i = 0
@@ -30,6 +30,33 @@ def drawL_system(t,instruction,angle, distance):
             t.right(angle)
         elif cmd == '-':
             t.left(angle)
+#height
+def calc_length_height(instruction, angle, correctionangle):
+    current_angle = correctionangle
+    x_offset = 0
+    y_offset = 0
+    min_x = 0
+    min_y = 0
+    max_x = 0
+    max_y = 0
+    for inst in instruction:
+        if inst == "F":
+            x_offset += cos(radians(current_angle))
+            y_offset += sin(radians(current_angle))
+        elif inst == "B":
+            x_offset -= cos(radians(current_angle))
+            y_offset -= sin(radians(current_angle))
+        elif inst == "+":
+            current_angle -= angle
+        elif inst == "-":
+            current_angle += angle
+        max_x = max(max_x, x_offset)
+        min_x = min(min_x, x_offset)
+        max_y = max(max_y, y_offset)
+        min_y = min(min_y, y_offset)
+    width = abs(max_x) + abs(min_x)
+    height = abs(max_y) + abs(min_y)
+    return width, height, abs(min_x), abs(min_y)
 #main function
 def main(iterations, axiom, rules, angle, length=8, size=2, y_offset=0,
         x_offset=0, offset_angle=0, width=450, height=450):
@@ -45,6 +72,6 @@ def main(iterations, axiom, rules, angle, length=8, size=2, y_offset=0,
     t.down()
     t.speed(0)
     t.pensize(size)
-    draw_l_system(t, inst, angle, length)
+   drawLsystem(t, inst, angle, length)
     t.hideturtle()
     wn.exitonclick()
