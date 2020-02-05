@@ -17,9 +17,9 @@ def L_system(its, axiom, rules):
     return endingstring
 #L-system
 def drawLsystem(t,instruction,angle, distance):
-    step = len([i for i in instruction if i in "FB"])
-    step = 1/step
-    i = 0
+    #step = len([i for i in instruction if i in "FB"])
+    #step = 1/step
+    #i = 0
 #Alphabet
     for cmd in instruction:
         if cmd == 'F':
