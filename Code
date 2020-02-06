@@ -95,4 +95,4 @@ axiom = "F++F++F++F++F"
 rules = {"F":"F++F++F+++++F-F++F"}
 iterations = 3 
 angle = 36
-main(iterations, axiom, rules, angle, width=width)
+main(iterations, axiom, rules, angle, width)
