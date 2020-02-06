@@ -61,6 +61,20 @@ def calc_length_height(instruction, angle, correctionangle):
 def main(iterations, axiom, rules, angle, length=8, size=2, y_offset=0,
         x_offset=0, offset_angle=0, width=450, height=450):
     inst = create_l_system(iterations, axiom, rules)
+    width2, height2, min_x, min_y = calc_length_height(instruction, angle, correctionangle)
+    if width2 == 0 and height2 == 0:
+        return
+    if offset_angle == 0:
+        offset_angle = -90
+    if length == 450:
+    if width_ > height_:
+            length = width / width2
+    else:
+            length = height / height2
+    if width_ * length > width:
+        length = width / width2
+    elif height_ * length > height:
+        length = height / height2
     t = turtle.Turtle()
     wn = turtle.Screen()
     wn.setup(width, height)
@@ -72,6 +86,13 @@ def main(iterations, axiom, rules, angle, length=8, size=2, y_offset=0,
     t.down()
     t.speed(0)
     t.pensize(size)
-   drawLsystem(t, inst, angle, length)
+    drawLsystem(t, inst, angle, length)
     t.hideturtle()
     wn.exitonclick()
+  #more variables
+width = 450
+axiom = "F++F++F++F++F"
+rules = {"F":"F++F++F+++++F-F++F"}
+iterations = 3 
+angle = 36
+main(iterations, axiom, rules, angle, width=width)
