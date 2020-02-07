@@ -1,98 +1,59 @@
-import math
 import turtle
-import time
-import gi
-from turtle import *
-from math import cos,sin, radians
-from gi.repository import Gtk
-#defining L-system
-def L_system(its, axiom, rules):
-    startingstring = axiom
-    if its == 0:
-        return axiom
-    endingstring = ""
-    for i in range (its):
-        endingstring = "". join(rules[i] if i in rules else i for i in startingstring)
-        startingstring == endingstring 
-    return endingstring
-#L-system
-def drawLsystem(t,instruction,angle, distance):
-    #step = len([i for i in instruction if i in "FB"])
-    #step = 1/step
-    #i = 0
-#Alphabet
-    for cmd in instruction:
-        if cmd == 'F':
-            t.forward(distance)
-        elif cmd == 'B':
-            t.backward(distance)
-        elif cmd == '+':
-            t.right(angle)
-        elif cmd == '-':
-            t.left(angle)
-#height
-def calc_length_height(instruction, angle, correctionangle):
-    current_angle = correctionangle
-    x_offset = 0
-    y_offset = 0
-    min_x = 0
-    min_y = 0
-    max_x = 0
-    max_y = 0
-    for inst in instruction:
-        if inst == "F":
-            x_offset += cos(radians(current_angle))
-            y_offset += sin(radians(current_angle))
-        elif inst == "B":
-            x_offset -= cos(radians(current_angle))
-            y_offset -= sin(radians(current_angle))
-        elif inst == "+":
-            current_angle -= angle
-        elif inst == "-":
-            current_angle += angle
-        max_x = max(max_x, x_offset)
-        min_x = min(min_x, x_offset)
-        max_y = max(max_y, y_offset)
-        min_y = min(min_y, y_offset)
-    width = abs(max_x) + abs(min_x)
-    height = abs(max_y) + abs(min_y)
-    return width, height, abs(min_x), abs(min_y)
-#main function
-def main(iterations, axiom, rules, angle, length=8, size=2, y_offset=0,
-        x_offset=0, offset_angle=0, width=450, height=450):
-    inst = create_l_system(iterations, axiom, rules)
-    width2, height2, min_x, min_y = calc_length_height(instruction, angle, correctionangle)
-    if width2 == 0 and height2 == 0:
+tt=turtle.Turtle()
+#tree
+#main function:
+def recursion(length):
+    if length<10:
         return
-    if offset_angle == 0:
-        offset_angle = -90
-    if length == 450:
-    if width_ > height_:
-            length = width / width2
     else:
-            length = height / height2
-    if width_ * length > width:
-        length = width / width2
-    elif height_ * length > height:
-        length = height / height2
-    t = turtle.Turtle()
-    wn = turtle.Screen()
-    wn.setup(width, height)
-    t.up()
-    t.backward(-x_offset)
-    t.left(90)
-    t.backward(-y_offset)
-    t.left(offset_angle)
-    t.down()
-    t.speed(0)
-    t.pensize(size)
-    drawLsystem(t, inst, angle, length)
-    t.hideturtle()
-    wn.exitonclick()
-  #more variables
-width = 450
-axiom = "F++F++F++F++F"
-rules = {"F":"F++F++F+++++F-F++F"}
-iterations = 3 
-angle = 36
-main(iterations, axiom, rules, angle, width)
+        tt.forward(length)
+        tt.left(30)
+        recursion(3*length/4)
+        tt.right(60)
+        recursion(3*length/4)
+        tt.left(30)
+        tt.backward(length)
+recursion(100)
+#dragon curve
+limit = 1
+#left and right
+left = 'l'
+right = 'r'
+#axiom
+intial = right
+new = intial
+#ask user for input
+iteration = int(input("Enter # of iterations : "))
+length = int(input("Enter length of each segment : "))
+#rules:
+while limit<iteration: 
+        new = intial + right
+        intial = intial[:: -1]
+        for i in range(0, len(intial)):  
+                if intial[i] == right:
+                        intial = (intial[:i])+ (left) + (intial[i + 1:]) 
+                elif intial[i] == left:
+                        intial = (intial[:i]) + (right) + (intial[i + 1:])                                                              
+        new = (new) + (intial)  
+        intial = new                                     
+        limit += 1
+#turtle
+turtle.ht() 
+turtle.speed(0)  
+turtle.color="blue"  
+turtle.bgcolor="green"
+turtle.forward(length)
+tt=turtle.Turtle()
+#main function
+for i in range(0, len(new)):  
+    if new[i] == (right):  
+        turtle.right(90)  
+        turtle.forward(length) 
+    elif new[i] == (left):     
+        turtle.left(90) 
+        turtle.forward(length) 
+    
+                  
+        
+        
+  
