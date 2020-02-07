@@ -73,6 +73,22 @@ turtle.backward(length/2)
 for i in range(6):
     flake(length, 7)
     turtle.right(120)
+#hilbert II curve
+def hilbert (length,rule, limit):
+    if limit == 0:
+     a = hilbert(length, "a" , limit-1)
+     b = hilbert(length, "b" , limit-1)
+     l = turtle.left(90)
+     r = turtle.right(90)
+     f = turtle.forward(length)
+     if rule == "a":
+         l(); b(); f(); r(); f(); a(); r(); f(); b(); l();
+     if rule == "b":
+         r; a(); f(); l(); b(); f(); b(); l(); f(); a(); r();    
+#turtle
+t = turtle.Turtle()
+turtle.speed(0)
+hilbert(5,"a",5)   
 
     
                   
