@@ -52,6 +52,28 @@ for i in range(0, len(new)):
     elif new[i] == (left):     
         turtle.left(90) 
         turtle.forward(length) 
+#Koch Curve
+def flake(length, limit):
+    if limit == 0:
+        turtle.forward(length)
+        return
+    length /= 3.00
+    flake(length, limit-1)
+    turtle.left(60)
+    flake(length, limit-1)
+    turtle.right(120)
+    flake(length, limit-1)
+    turtle.left(60)
+    flake(length, limit-1)
+#turtle
+turtle.speed(0)
+length=300.0
+turtle.backward(length/2)
+#replication
+for i in range(6):
+    flake(length, 7)
+    turtle.right(120)
+
     
                   
         
